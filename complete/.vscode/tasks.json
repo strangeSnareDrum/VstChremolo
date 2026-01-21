@@ -15,6 +15,8 @@
         ".",
         "-B",
         "build",
+        "-G",
+        "Ninja",
         "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
       ],
       "group": {
@@ -63,6 +65,48 @@
       "problemMatcher": [
         "$gcc"
       ]
+    },
+    {
+      "label": "Build target TremoloCoursePlugin_Standalone",
+      "type": "process",
+      "command": "cmd.exe",
+      "args": [
+        "/c",
+        "call",
+        "%ProgramFiles%\\Microsoft Visual Studio\\18\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat",
+        "&&",
+        "cmake",
+        "--build",
+        "build",
+        "--target",
+        "TremoloCoursePlugin_Standalone"
+      ],
+      "group": {
+        "kind": "build"
+        // "isDefault": true
+      },
+      // "dependsOn": ["Configure"],
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Run Tremolo Standalone",
+      "type": "shell",
+      "command": "\"${workspaceFolder}\\build\\TremoloCoursePlugin_artefacts\\Debug\\Standalone\\Tremolo.exe\"",
+      "options": {
+        "shell": {
+          "executable": "cmd.exe",
+          "args": [
+            "/C"
+          ]
+        }
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
     },
     {
       "label": "Clean the build dir",

@@ -3,7 +3,10 @@ PluginProcessor::PluginProcessor()
     : AudioProcessor(
           BusesProperties()
               .withInput("Input", juce::AudioChannelSet::stereo(), true)
-              .withOutput("Output", juce::AudioChannelSet::stereo(), true)) {}
+              .withOutput("Output", juce::AudioChannelSet::stereo(), true)) {
+  std::cout << "Processor" << std::endl;
+  DBG("Tremolo Plugin Processor constructed");
+}
 
 const juce::String PluginProcessor::getName() const {
   return TREMOLO_PLUGIN_NAME;

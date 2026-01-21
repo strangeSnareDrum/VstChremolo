@@ -51,6 +51,7 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   addAndMakeVisible(bypassLabel);
 
   bypassButton.onClick = [this]() {
+    DBG("Bypass button clicked");
     bypassButton.setButtonText(bypassButton.getToggleState() ? "Bypassed"
                                                              : "Off");
   };
@@ -64,6 +65,7 @@ PluginEditor::PluginEditor(PluginProcessor& p)
   addAndMakeVisible(lfoVisualizer);
 
   setLookAndFeel(&lookAndFeel);
+  std::cout << "Editor" << std::endl;
 
   // Make sure that before the constructor has finished, you've set the
   // editor's size to whatever you need it to be.
