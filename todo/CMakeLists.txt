@@ -8,11 +8,13 @@ cmake_minimum_required(VERSION 3.25 FATAL_ERROR)
 # Enable setting CMAKE_MSVC_DEBUG_INFORMATION_FORMAT
 set(CMAKE_POLICY_DEFAULT_CMP0141        NEW      CACHE STRING "" FORCE)
 
-# Sets the minimum deployment target
-# macOS 10.11 is the minimum required by JUCE
-set(CMAKE_OSX_DEPLOYMENT_TARGET "10.11" CACHE STRING "" FORCE)
-# Builds a binary that works on Apple Silicon (arm64) and Intel-based Macs
-set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "" FORCE)
+if (APPLE)
+  # Sets the minimum deployment target
+  # macOS 10.11 is the minimum required by JUCE
+  set(CMAKE_OSX_DEPLOYMENT_TARGET "10.11" CACHE STRING "" FORCE)
+  # Builds a binary that works on Apple Silicon (arm64) and Intel-based Macs
+  set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "" FORCE)
+endif()
 
 # Sets a few variables, like PROJECT_NAME.
 project(JucePluginDevelopmentCourseTremoloPlugin)
@@ -61,23 +63,28 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   set_directory_properties(PROPERTIES JUCE_VST3_COPY_DIR "$ENV{LOCALAPPDATA}/Programs/Common/VST3")
 endif()
 
+set(JUCE_ENABLE_MODULE_SOURCE_GROUPS OFF)
+set(JUCE_BUILD_EXTRAS OFF)
+set(JUCE_BUILD_EXAMPLES OFF)
+set(JUCE_USE_CURL OFF)
+set(JUCE_WEB_BROWSER OFF)
+set(JUCE_USE_WINRT_MIDI OFF)
+
 # Adds a plugin target.
-set(TREMOLO_PLUGIN_NAME "TODO: set your plugin name")
+set(TREMOLO_PLUGIN_NAME "VstChremolo")
 juce_add_plugin(
-  TremoloCoursePlugin
+  VstChremolo
   PRODUCT_NAME
     ${TREMOLO_PLUGIN_NAME}
   VERSION
-    # TODO: add version
+    1.0.0
   COMPANY_NAME
-    # TODO: add company
+    "RoofCorp"
   PLUGIN_MANUFACTURER_CODE
-    # TODO: add plugin manufacturer code
+    Rfc3
   PLUGIN_CODE
-    # TODO: add plugin code
+    Crm0
   FORMATS
-    Standalone
-    AU
     VST3
   IS_SYNTH
     FALSE
@@ -92,7 +99,7 @@ juce_add_plugin(
 )
 
 # Configures the JUCE sources included in the plugin target.
-target_compile_definitions(TremoloCoursePlugin
+target_compile_definitions(VstChremolo
   PRIVATE
     JUCE_WEB_BROWSER=0
     JUCE_USE_CURL=0
@@ -126,7 +133,7 @@ target_compile_options(tremolo_plugin INTERFACE "${PROJECT_WARNINGS_CXX}")
 target_link_libraries(tremolo_plugin INTERFACE tremolo::tremolo_plugin_assets)
 
 target_link_libraries(
-  TremoloCoursePlugin
+  VstChremolo
   PRIVATE
     tremolo::tremolo_plugin
   PUBLIC

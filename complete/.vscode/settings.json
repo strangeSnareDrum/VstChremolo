@@ -1,0 +1,13 @@
+{
+    "cmake.sourceDirectory": "C:/christian/repos/VstGain",
+    "stm32cube-ide-build-cmake.intellisense.enableAutomaticConfiguration": false,
+    "stm32cube-ide-build-cmake.project-setup.incubationWebview": false,
+    "cmake.clearOutputBeforeBuild": false,
+    "cmake.configureOnEdit": false,
+    "cmake.configureOnOpen": false,
+    "cmake.ctest.testExplorerIntegrationEnabled": false,
+    "cmake.enableAutomaticKitScan": false,
+    "cmake.exportCompileCommandsFile": true,
+    "editor.formatOnSave": true,
+    "editor.inlayHints.enabled": "off"
+}
